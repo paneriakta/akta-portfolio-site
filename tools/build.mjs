@@ -61,6 +61,7 @@ const year = new Date().getFullYear();
 const ICON_LOCK = '<svg class="icon-lock" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2"/></svg>';
 const ICON_ARROW = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';
 const ICON_IMG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-5-8 8"/></svg>';
+const ICON_CLOSE = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg>';
 const ICON_INFO = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 7.2V11M8 5v.1"/></svg>';
 
 /* ---------- collected report data ---------- */
@@ -128,29 +129,44 @@ function baseVars(relDir, extra = {}) {
   };
 }
 
-/* "Request the password" block. With a form service set: visitor types their email, one click, done.
- * Without one: a mailto link with the subject already filled in. */
-let requestCount = 0;
-function requestHtml(study) {
+/* "Request password" CTA. It is a mailto link with the subject filled in, so it works with no JavaScript
+ * and no form service. When a form service is set, request.js turns it into a button that opens a modal
+ * where the visitor only types their email. */
+function requestHtml(study, small = false) {
   const subject = 'Password request: ' + study;
+  const href = site.email ? `mailto:${site.email}?subject=${encodeURIComponent(subject)}` : 'mailto:';
+  const open = requestEndpoint() ? ` data-request-open data-study="${esc(study)}" aria-haspopup="dialog"` : '';
+  return `<a class="btn btn-ghost${small ? ' btn-sm' : ''}" href="${esc(href)}"${open}${site.email ? '' : ' data-placeholder="email"'}>Request password</a>`;
+}
+
+/* One modal per page, added only when the page has a request CTA and a form service is set. */
+function requestDialog() {
   const ep = requestEndpoint();
-  if (!ep) {
-    const href = site.email ? `mailto:${site.email}?subject=${encodeURIComponent(subject)}` : 'mailto:';
-    return `<p class="request-alt"><a href="${esc(href)}"${site.email ? '' : ' data-placeholder="email"'}>Request the password by email</a></p>`;
-  }
-  const id = 'rq-' + (++requestCount);
-  return `<form class="request-pw" action="${esc(ep)}" method="POST" data-request-form>
-  <label for="${id}">No password? Enter your email and I'll send it to you.</label>
-  <div class="request-row">
-    <div class="field"><input id="${id}" type="email" name="email" required autocomplete="email" inputmode="email" placeholder="you@company.com" aria-describedby="${id}-msg"></div>
-    <button class="btn btn-ghost btn-sm" type="submit">Request password</button>
-  </div>
-  <input type="hidden" name="_subject" value="${esc(subject)}">
-  <input type="hidden" name="study" value="${esc(study)}">
- <div class="hp" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><label>Leave this empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
-  <p class="form-msg" id="${id}-msg" role="status" aria-live="polite" data-request-msg></p>
-  <p class="request-note">Used only to send you the password.</p>
-</form>`;
+  if (!ep) return '';
+  return `
+<dialog class="modal" id="request-dialog" aria-labelledby="rq-title" aria-describedby="rq-desc">
+  <form class="modal-form" action="${esc(ep)}" method="POST" data-request-form novalidate>
+    <div class="modal-head">
+      <h2 id="rq-title">Request the password</h2>
+      <button class="modal-x" type="button" data-request-close aria-label="Close">${ICON_CLOSE}</button>
+    </div>
+    <p class="modal-desc" id="rq-desc">Enter your email and I'll send you the password for <strong data-request-study>the full case studies</strong>.</p>
+    <div data-request-fields>
+      <label class="modal-label" for="rq-email">Your email</label>
+      <div class="field"><input id="rq-email" type="email" name="email" required autocomplete="email" inputmode="email" placeholder="you@company.com" aria-describedby="rq-msg" autofocus></div>
+      <input type="hidden" name="_subject" value="Password request" data-request-subject>
+      <input type="hidden" name="study" value="" data-request-study-field>
+      <div class="hp" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><label>Leave this empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
+    </div>
+    <p class="form-msg" id="rq-msg" role="status" aria-live="polite" data-request-msg></p>
+    <div class="btn-row" data-request-actions>
+      <button class="btn btn-primary" type="submit">Send request</button>
+      <button class="btn btn-ghost" type="button" data-request-close>Cancel</button>
+    </div>
+    <div class="btn-row" data-request-done hidden><button class="btn btn-primary" type="button" data-request-close>Done</button></div>
+    <p class="modal-note">Used only to send you the password.</p>
+  </form>
+</dialog>`;
 }
 
 const curVars = (cur) => ({
@@ -168,6 +184,7 @@ function pageShell({ relDir, title, description, body, cur, robots = '', scripts
     ...vars, ...curVars(cur), title: esc(title), description: esc(description), canonical: esc(url), ogimage: esc(ogimage),
     robots: robots ? `<meta name="robots" content="${robots}">\n` : '', scripts: scriptTags, csp: cspMeta(),
   };
+  if (body.includes('data-request-open')) body += requestDialog();
   const html = render(partial('head') + partial('nav') + `<main id="main"${bodyClass ? ` class="${bodyClass}"` : ''}>\n` + body + '\n</main>\n' + partial('footer'), v);
   return html;
 }
@@ -281,7 +298,7 @@ function buildPublicPage(srcFile, outRel, extra = {}) {
   const base = baseVars(relDir, { rootAbs }).base;
   const posts = loadPosts();
   const vars = {
-    request: requestHtml('All case studies'), cards: cardsHtml(base), rows: body.includes('{{rows}}') ? rowsHtml(base, outRel) : '', tiles_home: tilesHome(base),
+    request: requestHtml('all case studies', true), cards: cardsHtml(base), rows: body.includes('{{rows}}') ? rowsHtml(base, outRel) : '', tiles_home: tilesHome(base),
     posts_home: posts.slice(0, 3).map(postHtml).join('\n'), posts_list: posts.map(postHtml).join('\n'),
     verify: fullUrl(studies[0], base), ...extra,
   };
@@ -298,7 +315,7 @@ function buildShort(s) {
   const base = baseVars(relDir).base;
   const src = read(R('src/short', s.slug + '.html'));
   const { meta, body } = parsePage(src);
-  const vars = { ...baseVars(relDir), meta: metaHtml(s, rel), prevnext: prevNext(s, base), full: 'full/', request: requestHtml(s.title) };
+  const vars = { ...baseVars(relDir), meta: metaHtml(s, rel), prevnext: prevNext(s, base), full: 'full/', request: requestHtml(s.short) };
   let b = render(body, vars);
   b = publicTokens(b, rel);
   const html = pageShell({ relDir, title: meta.title, description: meta.description, body: b, cur: 'work', bodyClass: 'short', scripts: ['request.js'], pathForUrl: `work/${s.slug}/` });
@@ -374,7 +391,7 @@ function buildLong(s, password) {
   const shellBody = render(partial('full-shell'), {
     ...baseVars(relDir), slug: s.slug, title_text: esc(s.title), summary: esc(s.summary),
     meta: metaHtml(s, rel), short_url: '../', payload: JSON.stringify(payload),
-    prevnext: prevNext(s, base), request: requestHtml(s.title),
+    prevnext: prevNext(s, base), request: requestHtml(s.short),
   });
   let b = publicTokens(shellBody, rel);
   const html = pageShell({ relDir, title: `${s.short}: full case study (password protected)`, description: s.summary, body: b, cur: 'work', robots: 'noindex', scripts: ['unlock.js', 'request.js'], pathForUrl: `work/${s.slug}/full/` });

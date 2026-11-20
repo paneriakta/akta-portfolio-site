@@ -99,24 +99,35 @@
   </section>
 <div class="cta-lock reveal">
   <div><h3><svg class="icon-lock" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2"/></svg> Read the full case study</h3><p>Password protected. It has the trade-offs in full, the results and how they were measured, and what I would do differently.</p></div>
-  <div class="btn-row"><a class="btn btn-primary" href="full/">Open full case study</a></div>
-  <form class="request-pw" action="https://formspree.io/f/mvkabzzy" method="POST" data-request-form>
-  <label for="rq-8">No password? Enter your email and I'll send it to you.</label>
-  <div class="request-row">
-    <div class="field"><input id="rq-8" type="email" name="email" required autocomplete="email" inputmode="email" placeholder="you@company.com" aria-describedby="rq-8-msg"></div>
-    <button class="btn btn-ghost btn-sm" type="submit">Request password</button>
-  </div>
-  <input type="hidden" name="_subject" value="Password request: Notification Center and Task Center: owning a platform feature end to end">
-  <input type="hidden" name="study" value="Notification Center and Task Center: owning a platform feature end to end">
- <div class="hp" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><label>Leave this empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
-  <p class="form-msg" id="rq-8-msg" role="status" aria-live="polite" data-request-msg></p>
-  <p class="request-note">Used only to send you the password.</p>
-</form>
+  <div class="btn-row"><a class="btn btn-primary" href="full/">Open full case study</a><a class="btn btn-ghost" href="mailto:hello@aktapaneri.com?subject=Password%20request%3A%20Notification%20Center%20and%20Task%20Center" data-request-open data-study="Notification Center and Task Center" aria-haspopup="dialog">Request password</a></div>
 </div>
 <nav class="prevnext" aria-label="Other case studies"><a class="prev" href="../../work/ai-at-scrut/"><p class="eyebrow">Previous study</p><strong>AI at Scrut: from a Q&amp;A assistant to agents</strong></a><a class="next" href="../../work/spendflo/"><p class="eyebrow">Next study</p><strong>Spendflo: building a design team and a product from zero</strong></a></nav>
 
 </div>
 
+<dialog class="modal" id="request-dialog" aria-labelledby="rq-title" aria-describedby="rq-desc">
+  <form class="modal-form" action="https://formspree.io/f/mvkabzzy" method="POST" data-request-form novalidate>
+    <div class="modal-head">
+      <h2 id="rq-title">Request the password</h2>
+      <button class="modal-x" type="button" data-request-close aria-label="Close"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+    </div>
+    <p class="modal-desc" id="rq-desc">Enter your email and I'll send you the password for <strong data-request-study>the full case studies</strong>.</p>
+    <div data-request-fields>
+      <label class="modal-label" for="rq-email">Your email</label>
+      <div class="field"><input id="rq-email" type="email" name="email" required autocomplete="email" inputmode="email" placeholder="you@company.com" aria-describedby="rq-msg" autofocus></div>
+      <input type="hidden" name="_subject" value="Password request" data-request-subject>
+      <input type="hidden" name="study" value="" data-request-study-field>
+      <div class="hp" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><label>Leave this empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
+    </div>
+    <p class="form-msg" id="rq-msg" role="status" aria-live="polite" data-request-msg></p>
+    <div class="btn-row" data-request-actions>
+      <button class="btn btn-primary" type="submit">Send request</button>
+      <button class="btn btn-ghost" type="button" data-request-close>Cancel</button>
+    </div>
+    <div class="btn-row" data-request-done hidden><button class="btn btn-primary" type="button" data-request-close>Done</button></div>
+    <p class="modal-note">Used only to send you the password.</p>
+  </form>
+</dialog>
 </main>
 <footer class="footer">
   <div class="wrap">

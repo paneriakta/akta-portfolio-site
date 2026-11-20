@@ -5,14 +5,14 @@
   <p class="sub">Four studies, from the platform I rebuilt to the team I built from zero. Read the short form of any of them in about 90 seconds.</p>
 </div>
 <div class="wrap" style="padding-bottom:24px">
-  <div class="note">{{info}}<p>The full studies are password protected. Enter the password once below to unlock all four for this browser tab, or request it just after.</p></div>
+  <div class="note">{{info}}<p>The full studies are password protected. Enter the password once below to unlock all four for this browser tab. No password? Use Request password.</p></div>
   <form class="unlock-inline" data-unlock-index data-verify="{{verify}}" novalidate>
     <label class="sr-only" for="idx-pw">Password for the full case studies</label>
     <div class="field"><input id="idx-pw" data-pw type="password" placeholder="Password" autocomplete="current-password" autocapitalize="off" spellcheck="false" aria-describedby="idx-msg"><button type="button" data-toggle aria-pressed="false" aria-label="Show or hide password">Show</button></div>
     <button class="btn btn-primary btn-sm" type="submit">Unlock all</button>
+    {{request}}
     <p class="form-msg" id="idx-msg" role="status" aria-live="polite" data-msg style="flex-basis:100%;margin:4px 0 0"></p>
   </form>
-  {{request}}
   <p class="form-msg ok" data-index-done hidden style="margin:0 0 8px">Unlocked for this tab. Open any long form below.
     <button class="btn btn-ghost btn-sm" type="button" data-index-lock style="margin-left:8px">{{lock}} Lock again</button></p>
   <div class="rows" style="margin-top:32px">
