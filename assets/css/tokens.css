@@ -1,0 +1,37 @@
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter-latin-wght-normal.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --bg: #08090a;
+  --bg-raised: #0f1011;
+  --bg-hover: #151618;
+  --line: rgba(255, 255, 255, .08);
+  --line-strong: rgba(255, 255, 255, .14);
+  --text: #f7f8f8;
+  --text-2: #b4b8bf;
+  --text-3: #8a8f98;
+  --accent: #dc6a6a;
+  --accent-soft: rgba(220, 106, 106, .14);
+  --ok: #4cb782;
+  --warn: #f2c94c;
+  --info: #5e9bdc;
+  --todo: #f2c94c;
+  --radius: 10px;
+  --radius-sm: 6px;
+  --maxw: 1080px;
+  --readw: 680px;
+  --gutter: 24px;
+  --nav-h: 56px;
+
+  --font: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+
+  --ease: cubic-bezier(.2, .6, .2, 1);
+  --t: 160ms;
+  --highlight: inset 0 1px 0 rgba(255, 255, 255, .05);
+}

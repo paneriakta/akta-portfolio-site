@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /work/*/full/
+
+Sitemap: https://aktapaneri.com/sitemap.xml

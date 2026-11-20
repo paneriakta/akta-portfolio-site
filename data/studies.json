@@ -1,0 +1,146 @@
+[
+  {
+    "slug": "scrut-automation",
+    "n": "01",
+    "title": "Scrut Automation: building design into a leadership function",
+    "short": "Scrut Automation",
+    "summary": "Rebuilt a GRC platform instead of patching it, built the Nucleus design system, and grew design from two people to a team of eight.",
+    "role": "Head of Design (2024), promoted to Director of Design (July 2026)",
+    "roleShort": "Head of Design, then Director",
+    "team": "Grew from 1 to 8 designers and strategists",
+    "timeline": "2024 to present",
+    "scope": "Platform redesign, Nucleus design system, design team, pod operating model, designers shipping code",
+    "chips": [
+      "+40% weekly active usage",
+      "33% faster handoff",
+      "$5M to $10M ARR"
+    ],
+    "key": "+40% weekly active usage",
+    "meta": [
+      [
+        "Role",
+        "Head of Design (2024), promoted to Director of Design (July 2026)"
+      ],
+      [
+        "Team",
+        "Grew from 1 to 8 designers and strategists"
+      ],
+      [
+        "Timeline",
+        "2024 to present"
+      ],
+      [
+        "Scope",
+        "Platform redesign, Nucleus design system, design team, pod operating model, designers shipping code"
+      ]
+    ]
+  },
+  {
+    "slug": "ai-at-scrut",
+    "n": "02",
+    "title": "AI at Scrut: from a Q&A assistant to agents",
+    "short": "AI at Scrut",
+    "summary": "Led design for three stages of AI in a compliance product: an assistant, AI inside everyday workflows, and agents. Each stage had to be checkable by the user.",
+    "role": "Head of Design, then Director of Design",
+    "roleShort": "Head of Design, then Director",
+    "team": "2 Designers on AI Features, Partner with AI PM + ML Engg",
+    "timeline": "Jan 2025 → Now",
+    "scope": "Scrut Teammates, five AI features inside workflows, compliance agents, testing AI output",
+    "chips": [
+      "3 stages of AI",
+      "5 workflow features",
+      "Confidence shown to users"
+    ],
+    "key": "3 stages, 5 workflow features",
+    "meta": [
+      [
+        "Role",
+        "Head of Design, then Director of Design"
+      ],
+      [
+        "Team",
+        "2 Designers on AI Features, Partner with AI PM + ML Engg"
+      ],
+      [
+        "Timeline",
+        "January 2025 → Now"
+      ],
+      [
+        "Scope",
+        "Scrut Teammates, five AI features inside workflows, compliance agents, testing AI output"
+      ]
+    ]
+  },
+  {
+    "slug": "notification-task-center",
+    "n": "03",
+    "title": "Notification Center and Task Center: owning a platform feature end to end",
+    "short": "Notification Center and Task Center",
+    "summary": "No team owned the problem, so I wrote the spec, designed the system behind it and designed the interface. The Task Center became the most used feature on the platform.",
+    "role": "Head of Design, also acting as product manager and system designer",
+    "roleShort": "Head of Design, also PM and system designer",
+    "team": "Head of Engineering, customer success managers",
+    "timeline": "Pitch (Jan 2025) → PRD (June 2025) → Phase 1 ship (Dec 2025)",
+    "scope": "Phase 1 product spec, notification plan, batching and routing logic, Task Center and Notification Center design, email digests",
+    "chips": [
+      "Most used feature on the platform",
+      "3 grouping rules",
+      "A \"what's next\" view for every role"
+    ],
+    "key": "Most used feature on the platform",
+    "meta": [
+      [
+        "Role",
+        "Head of Design, also acting as product manager and system designer"
+      ],
+      [
+        "Worked with",
+        "Head of Engineering, customer success managers"
+      ],
+      [
+        "Timeline",
+        "Pitch (Jan 2025) → PRD (June 2025) → Phase 1 ship (Dec 2025)"
+      ],
+      [
+        "Scope",
+        "Phase 1 product spec, notification plan, batching and routing logic, Task Center and Notification Center design, email digests"
+      ]
+    ]
+  },
+  {
+    "slug": "spendflo",
+    "n": "04",
+    "title": "Spendflo: building a design team and a product from zero",
+    "short": "Spendflo",
+    "summary": "First designer at Spendflo. Set the product direction, built a design team and a design system, and led the Workflow Builder through a hard trade-off.",
+    "role": "Founding Product Designer, then Head of Design",
+    "roleShort": "Founding Product Designer, then Head of Design",
+    "team": "Grew from 0 to 3 designers",
+    "timeline": "Feb 2022 to Feb 2024 (24 months)",
+    "scope": "Product direction, information architecture, design team, design operations and research, Spendflo design system, Workflow Builder",
+    "chips": [
+      "$1M ARR in year one",
+      "10x monthly active users",
+      "$500K from Workflow Builder"
+    ],
+    "key": "$1M ARR in year one",
+    "meta": [
+      [
+        "Role",
+        "Founding Product Designer, then Head of Design"
+      ],
+      [
+        "Team",
+        "Grew from 0 to 3 designers"
+      ],
+      [
+        "Timeline",
+        "Feb 2022 to Feb 2024 (24 months)"
+      ],
+      [
+        "Scope",
+        "Product direction, information architecture, design team, design operations and research, Spendflo design system, Workflow Builder"
+      ]
+    ]
+  }
+]

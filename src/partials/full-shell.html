@@ -1,0 +1,36 @@
+<div class="progress" hidden><i></i></div>
+<div class="wrap cs-head">
+  <p class="crumbs"><a href="{{base}}work/">Work</a><span aria-hidden="true">/</span><a href="{{short_url}}">Short form</a><span aria-hidden="true">/</span><span>Full case study</span></p>
+  <h1>{{title_text}}</h1>
+  <p class="byline">Full case study, password protected.</p>
+  {{meta}}
+  <p class="cs-lede" style="font-size:1.0625rem">{{summary}}</p>
+</div>
+<div class="wrap" id="lock-wrap" style="margin-top:48px">
+  <div class="lock-panel">
+    <h2>{{lock}} This study is password protected</h2>
+    <p>The full study holds the detail behind the short form: trade-offs, results and what I would do differently. Enter the password you were given. It stays unlocked for this browser tab only, across all four studies.</p>
+    <form data-unlock-form novalidate>
+      <label for="pw">Password</label>
+      <div class="field"><input id="pw" data-pw type="password" autocomplete="current-password" autocapitalize="off" spellcheck="false" aria-describedby="pw-msg"><button type="button" data-toggle aria-pressed="false" aria-label="Show or hide password">Show</button></div>
+      <div class="btn-row"><button class="btn btn-primary" type="submit">Unlock</button><a class="btn btn-ghost" href="{{short_url}}">Read the short form</a></div>
+      <p class="form-msg" id="pw-msg" role="status" aria-live="polite" data-msg></p>
+    </form>
+    <p class="small">No password? Use the contact link in the navigation and I will send one. Unlocking runs in your browser and needs JavaScript, and an https or localhost address.</p>
+    <noscript><p class="small">JavaScript is off. The long form cannot be unlocked without it. The short form is fully readable.</p></noscript>
+  </div>
+</div>
+<div class="wrap cs-layout" id="cs-layout" hidden>
+  <aside class="toc" aria-label="Contents">
+    <p class="eyebrow">Contents</p>
+    <ol data-toc-list></ol>
+    <div class="lock-row"><button class="btn btn-ghost btn-sm" type="button" data-lock>{{lock}} Lock</button></div>
+  </aside>
+  <div>
+    <div class="toc-mobile"><label class="eyebrow" for="toc-select">Jump to</label><select id="toc-select" data-toc-select></select></div>
+    <article class="cs-body" id="cs-body" aria-label="Full case study"></article>
+    <div class="btn-row" style="margin-top:56px"><button class="btn btn-ghost btn-sm" type="button" data-lock>{{lock}} Lock this study</button></div>
+    {{prevnext}}
+  </div>
+</div>
+<script type="application/json" id="payload">{{payload}}</script>

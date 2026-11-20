@@ -1,0 +1,35 @@
+<!--meta {"title": "Notification Center and Task Center | Akta Paneri", "description": "Notification Center and Task Center case study: no team owned the problem, so I wrote the spec, designed the system and the interface. The Task Center became the most used feature."} -->
+<div class="wrap cs-head">
+  <p class="crumbs"><a href="{{base}}work/">Work</a><span aria-hidden="true">/</span><span>Notification Center and Task Center</span></p>
+  <h1>Notification Center and Task Center: owning a platform feature end to end</h1>
+  <p class="byline">Short form. Case study by Akta Paneri.</p>
+  {{meta}}
+  <p class="cs-lede">No team owned this problem, so I wrote the product spec myself, designed the system behind it, and designed the interface. The Task Center became the most used feature on Scrut's platform. For the first time, every user could see in one place what they needed to do next.</p>
+</div>
+<div class="wrap cs-body">
+  <div class="tiles t3 reveal" style="margin-top:40px"><div class="tile"><span class="v">Most used</span><span class="l">Feature on Scrut's platform</span><span class="s">Task Center</span></div><div class="tile"><span class="v">Every role</span><span class="l">Has a "what's next" view</span><span class="s">New to the product</span></div><div class="tile"><span class="v">3</span><span class="l">Grouping rules</span><span class="s">By action, module and a moving window</span></div></div>
+
+  <section class="cs-section reveal" aria-labelledby="dec-h">
+    <p class="eyebrow">The decision</p>
+    <h2 id="dec-h">One inbox or two</h2>
+    <p>A notification says something happened. A task says you need to do something. Most products mix them, and important tasks get lost among updates.</p>
+    <div class="versus wide"><div><h4>One combined inbox</h4><p>Lower build effort at first. The main risk: tasks buried under updates, then muted.</p></div><div class="chosen"><h4>Separate centers, one shared system <span class="badge">Chosen</span></h4><p>Notifications fade; tasks stay until done, with deadlines. Two screens on one shared system, each with its own rules.</p></div></div>
+  </section>
+
+  <section class="cs-section reveal" aria-labelledby="did-h">
+    <p class="eyebrow">What I did</p>
+    <h2 id="did-h">Spec, system, interface</h2>
+    <ul><li><strong>Wrote a small Phase 1 spec</strong> and took it to the Head of Engineering and the product team. Months of discussion became agreement in one meeting.</li><li><strong>Built a notification plan</strong>, a grid of every notification type against each channel, that became the roadmap.</li><li><strong>Designed the grouping rules:</strong> by action, by module, and over a moving 10-minute window, so a burst becomes one notification.</li><li><strong>Designed the interface</strong> by role and to-dos rather than by module, with urgent items easy to spot.</li></ul>
+  </section>
+
+  <section class="cs-section reveal" aria-label="The study in one picture">
+    <p class="eyebrow">The study in one picture</p>
+    {{figure notif-fig1}}
+  </section>
+<div class="cta-lock reveal">
+  <div><h3>{{lock}} Read the full case study</h3><p>Password protected. It has the trade-offs in full, the results and how they were measured, and what I would do differently.</p></div>
+  <div class="btn-row"><a class="btn btn-primary" href="{{full}}">Open full case study</a><a class="btn btn-ghost" href="mailto:{{email}}"{{email_todo}}>Request the password</a></div>
+</div>
+{{prevnext}}
+
+</div>
