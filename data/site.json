@@ -6,6 +6,7 @@
   "siteUrl": "https://aktapaneri.com",
   "basePath": "",
   "email": "hello@aktapaneri.com",
+  "passwordRequestForm": "https://formspree.io/f/mvkabzzy",
   "emailPlaceholder": "hello@aktapaneri.com",
   "linkedin": "https://www.linkedin.com/aktapaneri",
   "linkedinPlaceholder": "https://www.linkedin.com/",

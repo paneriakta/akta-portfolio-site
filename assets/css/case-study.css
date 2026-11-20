@@ -379,3 +379,19 @@
 html[data-unlocked] .cs-head .meta, html[data-unlocked] .cs-head .cs-lede, html[data-unlocked] .cs-head .byline { display: none; }
 html[data-unlocked] .cs-head { padding-bottom: 0; }
 .ph .ph-file span { display: block; margin-bottom: 2px; }
+
+/* ---------- Request the password ---------- */
+.request-pw { margin: 18px 0 0; padding-top: 18px; border-top: 1px solid var(--line); width: 100%; }
+.request-pw > label { display: block; font-size: .875rem; color: var(--text-2); margin: 0 0 10px; text-transform: none; letter-spacing: 0; font-family: inherit; }
+.request-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.request-row .field { flex: 1 1 220px; max-width: 360px; height: 36px; }
+.request-pw .form-msg { margin: 8px 0 0; min-height: 0; }
+.request-pw .form-msg:empty { display: none; }
+.request-pw .form-msg.ok { color: var(--ok); }
+.request-note { font-size: .75rem !important; color: var(--text-3); margin: 8px 0 0 !important; }
+.request-alt { margin: 14px 0 0; font-size: .875rem; }
+.request-alt a { color: var(--text); }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.cta-lock .request-pw { flex-basis: 100%; }
+.lock-panel .request-pw { margin-top: 22px; }
+.lock-panel .request-row .field { max-width: none; }

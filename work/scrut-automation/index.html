@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-uYXKWGbtbqWjiPtdLzzMMLE8Yq3XaCa8IGLayMQqMOY='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-uYXKWGbtbqWjiPtdLzzMMLE8Yq3XaCa8IGLayMQqMOY='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://formspree.io; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Scrut Automation | Akta Paneri</title>
 <meta name="description" content="Scrut Automation case study: I led the decision to rebuild a GRC platform, built the Nucleus design system and grew the design team from one to eight.">
@@ -27,6 +27,7 @@
 <link rel="stylesheet" href="../../assets/css/case-study.css">
 <script>document.documentElement.classList.add('js');if(/[?&]draft=1/.test(location.search))document.documentElement.setAttribute('data-draft','');</script>
 <script src="../../assets/js/site.js" defer></script>
+<script src="../../assets/js/request.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -106,7 +107,19 @@
   </section>
 <div class="cta-lock reveal">
   <div><h3><svg class="icon-lock" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2"/></svg> Read the full case study</h3><p>Password protected. It has the trade-offs in full, the results and how they were measured, and what I would do differently.</p></div>
-  <div class="btn-row"><a class="btn btn-primary" href="full/">Open full case study</a><a class="btn btn-ghost" href="mailto:hello@aktapaneri.com">Request the password</a></div>
+  <div class="btn-row"><a class="btn btn-primary" href="full/">Open full case study</a></div>
+  <form class="request-pw" action="https://formspree.io/f/mvkabzzy" method="POST" data-request-form>
+  <label for="rq-6">No password? Enter your email and I'll send it to you.</label>
+  <div class="request-row">
+    <div class="field"><input id="rq-6" type="email" name="email" required autocomplete="email" inputmode="email" placeholder="you@company.com" aria-describedby="rq-6-msg"></div>
+    <button class="btn btn-ghost btn-sm" type="submit">Request password</button>
+  </div>
+  <input type="hidden" name="_subject" value="Password request: Scrut Automation: building design into a leadership function">
+  <input type="hidden" name="study" value="Scrut Automation: building design into a leadership function">
+  <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
+  <p class="form-msg" id="rq-6-msg" role="status" aria-live="polite" data-request-msg></p>
+  <p class="request-note">Used only to send you the password.</p>
+</form>
 </div>
 <nav class="prevnext" aria-label="Other case studies"><span class="empty"></span><a class="next" href="../../work/ai-at-scrut/"><p class="eyebrow">Next study</p><strong>AI at Scrut: from a Q&amp;A assistant to agents</strong></a></nav>
 

@@ -23,13 +23,24 @@ const safeUrl = (u) => (/^https?:\/\//i.test(String(u || '')) ? String(u) : '#')
 
 /* Content-Security-Policy, delivered as a meta tag (GitHub Pages cannot set headers).
  * The one inline script in the head is allowed by hash; everything else must be same-origin. */
+/* Password-request form service (e.g. Formspree). Only an https URL is accepted. */
+function requestEndpoint() {
+  const u = String(site.passwordRequestForm || '').trim();
+  if (!u) return '';
+  try { const x = new URL(u); if (x.protocol === 'https:') return x.href; } catch { /* fall through */ }
+  console.warn('WARN passwordRequestForm in data/site.json must be an https URL. Ignored: ' + u);
+  return '';
+}
+
 function cspMeta() {
+  const ep = requestEndpoint();
+  const formOrigin = ep ? ' ' + new URL(ep).origin : '';
   const head = read(path.join(ROOT, 'src/partials/head.html'));
   const hashes = [...head.matchAll(/<script>([\s\S]*?)<\/script>/g)]
     .map((m) => "'sha256-" + crypto.createHash('sha256').update(m[1], 'utf8').digest('base64') + "'");
   const csp = [
     "default-src 'self'", `script-src 'self' ${hashes.join(' ')}`.trim(), "style-src 'self' 'unsafe-inline'",
-    "img-src 'self' data:", "font-src 'self'", "connect-src 'self'", "object-src 'none'", "base-uri 'self'", "form-action 'self'",
+    "img-src 'self' data:", "font-src 'self'", `connect-src 'self'${formOrigin}`, "object-src 'none'", "base-uri 'self'", `form-action 'self'${formOrigin}`,
   ].join('; ');
   return `<meta http-equiv="Content-Security-Policy" content="${csp}">\n<meta name="referrer" content="strict-origin-when-cross-origin">\n`;
 }
@@ -115,6 +126,31 @@ function baseVars(relDir, extra = {}) {
     medium_todo: '', lock: ICON_LOCK, arrow: ICON_ARROW, info: ICON_INFO,
     ...extra.vars,
   };
+}
+
+/* "Request the password" block. With a form service set: visitor types their email, one click, done.
+ * Without one: a mailto link with the subject already filled in. */
+let requestCount = 0;
+function requestHtml(study) {
+  const subject = 'Password request: ' + study;
+  const ep = requestEndpoint();
+  if (!ep) {
+    const href = site.email ? `mailto:${site.email}?subject=${encodeURIComponent(subject)}` : 'mailto:';
+    return `<p class="request-alt"><a href="${esc(href)}"${site.email ? '' : ' data-placeholder="email"'}>Request the password by email</a></p>`;
+  }
+  const id = 'rq-' + (++requestCount);
+  return `<form class="request-pw" action="${esc(ep)}" method="POST" data-request-form>
+  <label for="${id}">No password? Enter your email and I'll send it to you.</label>
+  <div class="request-row">
+    <div class="field"><input id="${id}" type="email" name="email" required autocomplete="email" inputmode="email" placeholder="you@company.com" aria-describedby="${id}-msg"></div>
+    <button class="btn btn-ghost btn-sm" type="submit">Request password</button>
+  </div>
+  <input type="hidden" name="_subject" value="${esc(subject)}">
+  <input type="hidden" name="study" value="${esc(study)}">
+  <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
+  <p class="form-msg" id="${id}-msg" role="status" aria-live="polite" data-request-msg></p>
+  <p class="request-note">Used only to send you the password.</p>
+</form>`;
 }
 
 const curVars = (cur) => ({
@@ -245,7 +281,7 @@ function buildPublicPage(srcFile, outRel, extra = {}) {
   const base = baseVars(relDir, { rootAbs }).base;
   const posts = loadPosts();
   const vars = {
-    cards: cardsHtml(base), rows: body.includes('{{rows}}') ? rowsHtml(base, outRel) : '', tiles_home: tilesHome(base),
+    request: requestHtml('All case studies'), cards: cardsHtml(base), rows: body.includes('{{rows}}') ? rowsHtml(base, outRel) : '', tiles_home: tilesHome(base),
     posts_home: posts.slice(0, 3).map(postHtml).join('\n'), posts_list: posts.map(postHtml).join('\n'),
     verify: fullUrl(studies[0], base), ...extra,
   };
@@ -262,10 +298,10 @@ function buildShort(s) {
   const base = baseVars(relDir).base;
   const src = read(R('src/short', s.slug + '.html'));
   const { meta, body } = parsePage(src);
-  const vars = { ...baseVars(relDir), meta: metaHtml(s, rel), prevnext: prevNext(s, base), full: 'full/' };
+  const vars = { ...baseVars(relDir), meta: metaHtml(s, rel), prevnext: prevNext(s, base), full: 'full/', request: requestHtml(s.title) };
   let b = render(body, vars);
   b = publicTokens(b, rel);
-  const html = pageShell({ relDir, title: meta.title, description: meta.description, body: b, cur: 'work', bodyClass: 'short', pathForUrl: `work/${s.slug}/` });
+  const html = pageShell({ relDir, title: meta.title, description: meta.description, body: b, cur: 'work', bodyClass: 'short', scripts: ['request.js'], pathForUrl: `work/${s.slug}/` });
   write(R(rel), html);
   outputs.push(`work/${s.slug}/`);
 }
@@ -338,10 +374,10 @@ function buildLong(s, password) {
   const shellBody = render(partial('full-shell'), {
     ...baseVars(relDir), slug: s.slug, title_text: esc(s.title), summary: esc(s.summary),
     meta: metaHtml(s, rel), short_url: '../', payload: JSON.stringify(payload),
-    prevnext: prevNext(s, base),
+    prevnext: prevNext(s, base), request: requestHtml(s.title),
   });
   let b = publicTokens(shellBody, rel);
-  const html = pageShell({ relDir, title: `${s.short}: full case study (password protected)`, description: s.summary, body: b, cur: 'work', robots: 'noindex', scripts: ['unlock.js'], pathForUrl: `work/${s.slug}/full/` });
+  const html = pageShell({ relDir, title: `${s.short}: full case study (password protected)`, description: s.summary, body: b, cur: 'work', robots: 'noindex', scripts: ['unlock.js', 'request.js'], pathForUrl: `work/${s.slug}/full/` });
   write(R(rel), html);
   return { bytes: plain.length };
 }
