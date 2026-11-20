@@ -147,7 +147,7 @@ function requestHtml(study) {
   </div>
   <input type="hidden" name="_subject" value="${esc(subject)}">
   <input type="hidden" name="study" value="${esc(study)}">
-  <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
+ <div class="hp" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><label>Leave this empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
   <p class="form-msg" id="${id}-msg" role="status" aria-live="polite" data-request-msg></p>
   <p class="request-note">Used only to send you the password.</p>
 </form>`;
