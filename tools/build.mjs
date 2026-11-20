@@ -247,11 +247,11 @@ function prevNext(s, base) {
 
 function tilesHome(base) {
   const t = [
-    ['+40%', 'Weekly active usage', 'Scrut Automation', 'scrut-automation'],
-    ['33%', 'Faster design-to-development handoff', 'Scrut Automation', 'scrut-automation'],
-    ['$1M', 'ARR in year one', 'Spendflo', 'spendflo'],
-    ['1 to 8', 'Design team, designers and strategists', 'Scrut Automation', 'scrut-automation'],
-  ];
+  ['+40%',  'Weekly active usage after the platform rebuild',       'Platform rebuild', 'scrut-automation'],
+  ['5',     'AI features in daily workflows, one review pattern',   'AI at Scrut',      'ai-at-scrut'],
+  ['#1',    'Most used feature: the Task Center I specced',         'Task Center',      'notification-task-center'],
+  ['$500K', 'New revenue in one quarter from the Workflow Builder', 'Spendflo',         'spendflo'],
+];
   return t.map(([v, l, src, slug]) => `<a class="tile" href="${base}work/${slug}/"><span class="v">${v}</span><span class="l">${l}</span><span class="s">${src} &rarr;</span></a>`).join('');
 }
 
