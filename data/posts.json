@@ -1,5 +1,20 @@
 [
   {
+    "title": "Embrace the Blur",
+    "url": "https://medium.com/@aktapaneri/embrace-the-blur-ac6cfa6e4470",
+    "date": "2026-11-21",
+    "readingTime": "4 min read",
+    "excerpt": "Product, design and engineering are bleeding into each other. Good. Let’s stop guarding the lines and go see what’s on the other side. The lines between...",
+    "tags": [
+      "leadership",
+      "ux-design",
+      "design-process",
+      "ai",
+      "product-design"
+    ],
+    "image": "https://cdn-images-1.medium.com/max/1024/1*_45tjr5rCvh1qNioEeZC5Q.jpeg"
+  },
+  {
     "title": "When Empathy Backfires: The Secret Pain of Being a Designer Who Cares Too Much",
     "url": "https://medium.com/@aktapaneri/when-empathy-backfires-the-secret-pain-of-being-a-designer-who-cares-too-much-54c977912aa0",
     "date": "2025-07-25",
@@ -127,20 +142,5 @@
       "design-hiring"
     ],
     "image": "https://cdn-images-1.medium.com/max/1024/1*8kt6iP4oXWUE8LstuMv3GQ.png"
-  },
-  {
-    "title": "Synergy by Design: Uniting Product Managers and Designers",
-    "url": "https://medium.com/@aktapaneri/synergy-by-design-uniting-product-managers-and-designers-11a46fc7e04b",
-    "date": "2024-02-02",
-    "readingTime": "2 min read",
-    "excerpt": "Collaboration between product managers and designers can vary significantly in style, impacting the product development process and the team dynamics. Let’s...",
-    "tags": [
-      "ux-design",
-      "product-design",
-      "ux",
-      "product-management",
-      "collaboration"
-    ],
-    "image": "https://cdn-images-1.medium.com/max/512/1*y4WQ5lGatiB2X3pcgRdDpg@2x.jpeg"
   }
 ]
